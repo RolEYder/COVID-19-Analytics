@@ -10,3 +10,7 @@ table, td, th {
     width: 50%;
 
 }
+#total-deaths, #total-confirmed, #total-recovered {
+    font-weight: 500;
+    font-size: 25px;
+}
