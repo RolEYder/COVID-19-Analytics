@@ -1,5 +1,5 @@
 Plotly.d3.csv(" https://data.humdata.org/hxlproxy/api/data-preview.csv?url=https%3A%2F%2Fraw.githubusercontent.com%2FCSSEGISandData%2FCOVID-19%2Fmaster%2Fcsse_covid_19_data%2Fcsse_covid_19_time_series%2Ftime_series_covid19_confirmed_global.csv&filename=time_series_covid19_confirmed_global.csv", (err, rows) => {
-//console.log(rows)
+console.log(rows)
 const getKey = (rows, key) => {
     return rows.map(row => {return row[key]})
 
@@ -7,7 +7,7 @@ const getKey = (rows, key) => {
 
 const date = new Date();
 const day= date.getDate() - 1;
-const month=date.getMonth().toString(); 
+const month=date.getMonth() + 1; 
 const year = date.getFullYear().toString().substr(-2);
 const currentDate = `${month}/${day}/${year}`;
 const size = [];
@@ -16,15 +16,26 @@ const size = [];
 const cityName = getKey(rows, 'Country/Region'),
  cityLongitude = getKey(rows, 'Long'),
  cityLatitude = getKey(rows, 'Lat'),
- citySize = getKey(rows, `${currentDate}`),
- color = [,"rgb(255,65,54)","rgb(133,20,75)","rgb(255,133,27)","lightgrey"];
+ citySateProvince = getKey(rows, 'Province/State'),
+ citySize = getKey(rows, `${currentDate}`);
 
+console.log(currentDate)
 
 for (let i = 0; i < citySize.length; i++) {
-    let SIZE  = citySize[i] /  0.5;
+    let SIZE  = citySize[i] /  44;
     size.push(SIZE);
     
 }
+console.log(citySateProvince);
+for (let j = 0 ; j < citySize.length; j++) {
+    const res = `<tr>
+    <td>${cityName[j]} ${citySateProvince[j] ?  citySateProvince[j] : " "}</td>
+    <td>${citySize[j]}</td>
+</tr>`;
+
+$("#table").append(res);
+}
+
 
 
 
@@ -37,7 +48,7 @@ var data = [{
     text: cityName,
    
     marker: {
-        size: 20,
+        size: 10,
         line: {
             color: 'black',
             width: 0.5
@@ -60,6 +71,6 @@ var layout = {
     },
 };
 
-Plotly.newPlot("map", data, layout, {showLink: false});
+Plotly.newPlot("map", data, layout);
 
 })
