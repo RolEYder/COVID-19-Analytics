@@ -6,7 +6,7 @@ const getKey = (rows, key) => {
 }
 
 const date = new Date();
-const day= date.getDate() - 1;
+const day= date.getDate();
 const month=date.getMonth() + 1; 
 const year = date.getFullYear().toString().substr(-2);
 const currentDate = `${month}/${day}/${year}`;
@@ -19,7 +19,7 @@ const cityName = getKey(rows, 'Country/Region'),
  citySateProvince = getKey(rows, 'Province/State'),
  citySize = getKey(rows, `${currentDate}`);
 
-console.log(currentDate)
+console.log(currentDate)    
 
 for (let i = 0; i < citySize.length; i++) {
     let SIZE  = citySize[i] /  44;
