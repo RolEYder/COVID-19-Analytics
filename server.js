@@ -15,7 +15,13 @@ app.get('/', (req, res) => {
 
 
 // Server 
-app.listen(PORT, () => {
+
+config = {
+    host: '127.0.0.1',
+    port: 3000
+}
+
+app.listen(config, () => {
     console.log(`Running on port ${PORT}`);
 });
 
