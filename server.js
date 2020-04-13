@@ -25,7 +25,7 @@ app.use(router);
 // Server 
 const config = {
     host: process.env.IP || '0.0.0.0',
-    port: 3000
+    port: process.env.PORT || 3000
 }
 
 app.listen(config, () => {
