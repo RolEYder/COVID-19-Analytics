@@ -25,8 +25,9 @@ app.use(router);
 // Server 
 const config = {
     host: '127.0.0.1',
-    port: 3000
+    port: process.env.PORT
 }
+
 app.listen(config, () => {
     console.log(`Running on port ${config.port}`);
 });
