@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 app.use(router);
 // Server 
 const config = {
-    host: '127.0.0.1',
+    host: process.env.IP || '0.0.0.0',
     port: 3000
 }
 
