@@ -2,24 +2,26 @@
 
 
 class COVID_19_ANALYTICS {
-    
+    //give tree urls to managent the apis 
     constructor(url_1, url_2, url_3) {
         this.url = url_1;
         this.deathsUrl = url_2;
         this.recoveredUrl = url_3;
-     }
-
+     } 
+    
+     //show the tables  'Deaths, Recovered and Confirmed' 
     showTable(data, div, layout, config) {
         return Plotly.newPlot(div, data, layout, config);
     }
+    //plotting the global map 
     showPlotting(div, data,layout, config) {
         return Plotly.newPlot(div, data, layout, config);
     }
-
+    //function to get each key that return us from .csv when consuming the API 
     getKey(rows, key) {
         return rows.map(row => {return row[key]})
     }
-
+    //function to sum the total of Deaths, Recovered and Confirmed 
     totalSum(array, id, title) {
         let sum = 0; 
         let html = document.getElementById(id);
@@ -29,7 +31,7 @@ class COVID_19_ANALYTICS {
         }
         html.innerHTML = ` ${title} ${sum} `;
     }
-
+    // function to serialize the current time 
     getDate() {
         const DATE = new Date();
         const obj_date = {
@@ -42,7 +44,9 @@ class COVID_19_ANALYTICS {
         return obj_date;
     }
 
+        //function  to show the global map 
         showMap() {
+        
         Plotly.d3.csv(this.url, (err, rows) => {
            
             const date = this.getDate()
@@ -240,10 +244,9 @@ class COVID_19_ANALYTICS {
 const c = new COVID_19_ANALYTICS(
     "https://data.humdata.org/hxlproxy/api/data-preview.csv?url=https%3A%2F%2Fraw.githubusercontent.com%2FCSSEGISandData%2FCOVID-19%2Fmaster%2Fcsse_covid_19_data%2Fcsse_covid_19_time_series%2Ftime_series_covid19_confirmed_global.csv&filename=time_series_covid19_confirmed_global.csv"
     ,"https://data.humdata.org/hxlproxy/api/data-preview.csv?url=https%3A%2F%2Fraw.githubusercontent.com%2FCSSEGISandData%2FCOVID-19%2Fmaster%2Fcsse_covid_19_data%2Fcsse_covid_19_time_series%2Ftime_series_covid19_deaths_global.csv&filename=time_series_covid19_deaths_global.csv",
-    " https://data.humdata.org/hxlproxy/api/data-preview.csv?url=https%3A%2F%2Fraw.githubusercontent.com%2FCSSEGISandData%2FCOVID-19%2Fmaster%2Fcsse_covid_19_data%2Fcsse_covid_19_time_series%2Ftime_series_covid19_recovered_global.csv&filename=time_series_covid19_recovered_global.csv")
+    "https://data.humdata.org/hxlproxy/api/data-preview.csv?url=https%3A%2F%2Fraw.githubusercontent.com%2FCSSEGISandData%2FCOVID-19%2Fmaster%2Fcsse_covid_19_data%2Fcsse_covid_19_time_series%2Ftime_series_covid19_recovered_global.csv&filename=time_series_covid19_recovered_global.csv")
 c.showMap();
 c.showDeathsTable();
 c.showRecoveredTable();
-
 
 

@@ -1,6 +1,5 @@
 node_modules/
 package-lock.json
 .now/
-public/main.js
-public/table.js
-public/
+
+.now

@@ -1,27 +1,33 @@
 const express = require('express');
 const path = require('path');
-const router = express.Router();
 const app = express();
+const bodyParser = require('body-parser');
+const morgan = require('morgan')
+const router = require(path.join(__dirname, 'public/router/rest.api.js'));
 
-
-const PORT = 3000 || process.env.PORT;
 // Static folder
 app.use(express.static(path.join(__dirname, 'public')));
-
+app.use(morgan('dev'))
 
 app.get('/', (req, res) => {
     res.render('index', {})
 })
+app.use(express.urlencoded({extended: true}));
+//view engine 
+app.set('view engine', 'hbs');
+app.set('views', path.join(__dirname, 'public/views'));
+//middlerwares 
+app.use(express.json())
 
-
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+app.use(router);
 // Server 
-
-config = {
+const config = {
     host: '127.0.0.1',
     port: 3000
 }
-
 app.listen(config, () => {
-    console.log(`Running on port ${PORT}`);
+    console.log(`Running on port ${config.port}`);
 });
 
