@@ -155,6 +155,20 @@ router.get('/api/recovered/reduced', async (req, res) => {
     }
 })
 
+router.get('/api/recovered/country', async (req, res) => {
+    const country = req.query.country;
+    if (country) {
+
+        const output = await recovered.recoveredByCountry(country)
+        res.json(output);
+    }
+    else {
+        res.json({
+            error: "Country is required"
+        })
+    }
+})
+
 router.get('/api/recovered/province', async (req, res) => {
     const province = req.query.province;
     if (province) {
