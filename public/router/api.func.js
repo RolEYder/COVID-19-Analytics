@@ -24,7 +24,7 @@ class GlobalFuntion {
     constructor() {
     }
 
-    //functio to download the csv
+    //function to download the csv
     async downloadCsv(url, nameCsv) {
         const csvPath = path.resolve(__dirname, 'data', `${nameCsv}.csv`);
         const write = fs.createWriteStream(csvPath);
